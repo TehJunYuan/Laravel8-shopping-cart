@@ -8,7 +8,9 @@ use Stripe;
 
 class PaymentController extends Controller
 {
-    public function paymentPost(Request $request)
+    
+
+     public function paymentPost(Request $request)
     {
 	       
 	Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
