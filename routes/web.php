@@ -29,7 +29,7 @@ Route::post('/addCategory', [App\Http\Controllers\CategoryController::class, 'st
 Route::post('/addProduct', [App\Http\Controllers\ProductController::class, 'store'])->name('storeProduct');
 Route::post('/updateProduct', [App\Http\Controllers\ProductController::class, 'update'])->name('updateProduct');
 Route::post('/addCart', [App\Http\Controllers\CartController::class, 'add'])->name('add.to.cart');
-Route::post('\checkout', [App\Http\Controllers\PaymentController::class, 'paymentPost'])->name('payment.post');
+Route::post('/checkout', [App\Http\Controllers\PaymentController::class, 'paymentPost'])->name('payment.post');
 
 Route::get('/showCategory', [App\Http\Controllers\CategoryController::class, 'view'])->name('viewCategory');
 
