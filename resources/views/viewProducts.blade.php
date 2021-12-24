@@ -4,7 +4,6 @@
 		<div class="row">
           @foreach($products as $product)    
                         <div class="col-sm-4"> 
-                        <h6>Prodcuts</h6>
                             <div class="card h-100" >
                                 <div class="col text-center">
                                     <h5 class="card-title">{{$product->name}}</h5>
