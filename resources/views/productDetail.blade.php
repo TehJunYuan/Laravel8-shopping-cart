@@ -4,7 +4,7 @@
     @foreach($products as $product)
     <div class="col-m-2"></div>
     <div class="col-sm-10">
-        <div class="card-body">
+        <div class="card-body" style="item-align:center;">
             <div class="row">
                 <form action="{{route ('add.to.cart')}}" method="POST">
                     @CSRF

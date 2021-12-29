@@ -47,6 +47,9 @@ Route::get('/deleteCart/{id}',[App\Http\Controllers\CartController::class,'delet
 
 Route::get('/products', [App\Http\Controllers\ProductController::class, 'viewProduct'])->name('products');
 
+Route::post('/products', [App\Http\Controllers\ProductController::class, 'search'])->name('search');
+
+Route::get('/myorder', [App\Http\Controllers\PaymentController::class, 'show'])->name('my.order');
 
 Auth::routes();
 
