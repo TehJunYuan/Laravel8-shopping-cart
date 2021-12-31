@@ -51,12 +51,10 @@ Route::post('/products', [App\Http\Controllers\ProductController::class, 'search
 
 Route::get('/myorder', [App\Http\Controllers\PaymentController::class, 'show'])->name('my.order');
 
+Route::get('/pdfReport',[App\Http\Controllers\PDFController::class,'pdfReport'])->name('pdfReport');
+
 Auth::routes();
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
