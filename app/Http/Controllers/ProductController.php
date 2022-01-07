@@ -7,6 +7,7 @@ use DB;
 use App\Models\Product;
 use App\Models\Category;
 use Session;
+use Auth;
 
 class ProductController extends Controller
 {
@@ -35,6 +36,7 @@ class ProductController extends Controller
         ->leftjoin('categories','categories.id','=','products.CategoryID')
         ->select('products.*','categories.name as cName')
         ->get();
+        
         return view('showProduct')
         ->with('products',$viewProduct);
     }
@@ -91,6 +93,32 @@ class ProductController extends Controller
         ->where('name','like','%'.$keyword.'%')
         ->get();
 
+        return view('viewProducts')->with('products',$products);
+    }
+    
+    public function viewPhone()
+    {
+        $products = DB::table("products")
+        ->where('CategoryID','=','1')
+
+        ->get();
+        return view('viewProducts')->with('products',$products);
+    }
+
+    public function viewComputer()
+    {
+        $products = DB::table("products")
+        ->where('CategoryID','=','2')
+        ->orWhere('CategoryID','=','3')
+        ->get();
+        return view('viewProducts')->with('products',$products);
+    }
+
+    public function viewComputerHardware()
+    {
+        $products = DB::table("products")
+        ->where('CategoryID','=','4')
+        ->get();
         return view('viewProducts')->with('products',$products);
     }
 }

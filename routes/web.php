@@ -14,15 +14,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('/addCategory', function () {
     return view('addCategory');
-});
+})->name('addCategory');
 
 Route::get('/addProduct', function () {
     return view('addProduct',['categoryID'=>App\Models\Category::all()]);
-});
+})->name('addProduct');
 
 //upload new information route
 Route::post('/addCategory', [App\Http\Controllers\CategoryController::class, 'store'])->name('storeCategory');
@@ -52,6 +52,12 @@ Route::post('/products', [App\Http\Controllers\ProductController::class, 'search
 Route::get('/myorder', [App\Http\Controllers\PaymentController::class, 'show'])->name('my.order');
 
 Route::get('/pdfReport',[App\Http\Controllers\PDFController::class,'pdfReport'])->name('pdfReport');
+
+Route::get('/phone', [App\Http\Controllers\ProductController::class, 'viewPhone'])->name('phone.products');
+
+Route::get('/computer', [App\Http\Controllers\ProductController::class, 'viewComputer'])->name('computer.products');
+
+Route::get('/Hardware', [App\Http\Controllers\ProductController::class, 'viewComputerHardware'])->name('hardware.products');
 
 Auth::routes();
 

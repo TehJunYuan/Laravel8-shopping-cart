@@ -14,7 +14,7 @@ class CartController extends Controller
 {
     //
     //check the user login or not
-    public function __contruct(){
+    public function __construct(){
         $this->middleware('auth');
         return('home');
     }
@@ -39,7 +39,16 @@ class CartController extends Controller
         ->where('my_carts.userID','=',Auth::id()) //item match with current login user+
         ->paginate(5);
 
-        return view('mycart')->with('carts',$carts);
+        $noItem=DB::table('my_carts')
+        ->leftjoin('products','products.id','=','my_carts.productID')
+        ->select(DB::raw('COUNT(*) as count_item'))
+        ->where('my_carts.orderID','=','') //if'' empty means haven't make payment
+        ->where('my_carts.userID','=',Auth::id()) //item match with current login user+
+        ->groupBy('my_carts.userID')
+        ->get();
+        
+        return view('mycart')->with('carts',$carts)
+                             ->with('noItem',$noItem);
     }
 
     public function delete($id){

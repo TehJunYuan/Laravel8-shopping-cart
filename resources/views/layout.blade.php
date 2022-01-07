@@ -1,3 +1,7 @@
+<?php
+use App\Models\Product;
+$cartCount = Product::cartCount();
+?>
 <!Doctype html>
 <html lang="en">
   <head>
@@ -26,20 +30,20 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{{route('welcome')}}">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Products</a>
+        <a class="nav-link" href="{{route('products')}}">Products</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Category
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Phone</a>
-          <a class="dropdown-item" href="#">Desktops/Laptop</a>
+          <a class="dropdown-item" href="{{route('phone.products')}}">Phone</a>
+          <a class="dropdown-item" href="{{route('computer.products')}}">Desktops/Laptop</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Computer Hardware</a>
+          <a class="dropdown-item" href="{{route('hardware.products')}}">Computer Hardware</a>
         </div>
       </li>      
     </ul>
@@ -48,9 +52,20 @@
       <input class="form-control mr-sm-2" name="keyword" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>&nbsp;
-    <button type="button" class="btn btn-success">
-      My Cart <span class="badge bg-danger">1</span>
+    @guest
+    <button type="button" class="btn btn-success" onclick="window.location.href='{{route('show.my.cart')}}'">
+      My Cart 
     </button>
+    @else
+    <button type="button" class="btn btn-success" onclick="window.location.href='{{route('show.my.cart')}}'">
+      My Cart 
+      <span class="badge bg-danger">
+      @foreach($cartCount as $count)
+          {{$count}}
+        @endforeach 
+      </span>
+    </button>
+    @endguest
   </div>
 </nav>
 
