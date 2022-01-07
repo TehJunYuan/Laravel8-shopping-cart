@@ -59,6 +59,8 @@ Route::get('/computer', [App\Http\Controllers\ProductController::class, 'viewCom
 
 Route::get('/Hardware', [App\Http\Controllers\ProductController::class, 'viewComputerHardware'])->name('hardware.products');
 
+Route::get('/cartItem', [App\Http\Controllers\CartController::class, 'cartItem'])->name('cartItem');
+
 Auth::routes();
 
 

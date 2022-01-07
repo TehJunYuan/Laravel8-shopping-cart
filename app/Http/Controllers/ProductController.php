@@ -83,6 +83,9 @@ class ProductController extends Controller
 
     public function viewProduct(){
         $products=Product::all();
+
+        (new CartController)->cartItem(); //call cartController function
+        
         return view('viewProducts')->with('products',$products);
     }
     

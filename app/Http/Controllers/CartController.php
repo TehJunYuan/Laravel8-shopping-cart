@@ -39,16 +39,9 @@ class CartController extends Controller
         ->where('my_carts.userID','=',Auth::id()) //item match with current login user+
         ->paginate(5);
 
-        $noItem=DB::table('my_carts')
-        ->leftjoin('products','products.id','=','my_carts.productID')
-        ->select(DB::raw('COUNT(*) as count_item'))
-        ->where('my_carts.orderID','=','') //if'' empty means haven't make payment
-        ->where('my_carts.userID','=',Auth::id()) //item match with current login user+
-        ->groupBy('my_carts.userID')
-        ->get();
+        $this->cartItem(); //call function calculate no.cart Item
         
-        return view('mycart')->with('carts',$carts)
-                             ->with('noItem',$noItem);
+        return view('mycart')->with('carts',$carts);
     }
 
     public function delete($id){
@@ -57,5 +50,19 @@ class CartController extends Controller
         $deleteItem->delete(); //delete record
         Session::flash('success',"Item was remove successfully!");
         Return redirect()->route('show.my.cart');
+    }
+
+    public function cartItem(){
+        
+        $noItem=DB::table('my_carts')
+        ->leftjoin('products','products.id','=','my_carts.productID')
+        ->select(DB::raw('COUNT(*) as count_item'))
+        ->where('my_carts.orderID','=','') //if'' empty means haven't make payment
+        ->where('my_carts.userID','=',Auth::id()) //item match with current login user+
+        ->groupBy('my_carts.userID')
+        ->first();
+
+        $cartItem=$noItem->count_item;
+        Session()->put('cartItem',$cartItem); //assign value to session varible cartItem
     }
 }
