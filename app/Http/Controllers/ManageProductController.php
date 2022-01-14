@@ -54,6 +54,11 @@ class ManageProductController extends Controller
     
     
     public function view(){
+        //only admin can access to the page. It will check the account is an user or admin.
+        if(Auth::id()!=1){
+            Session::flash('success','Admin only allow to access this page!');
+            return redirect(route('products')); 
+        }
         // Select categoryID from product , Select id from categories
         // use join table 
         $viewProduct = DB::table("products")
