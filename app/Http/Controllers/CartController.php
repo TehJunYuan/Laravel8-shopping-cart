@@ -54,6 +54,7 @@ class CartController extends Controller
 
     public function cartItem(){
         
+        $cartItem=0;
         $noItem=DB::table('my_carts')
         ->leftjoin('products','products.id','=','my_carts.productID')
         ->select(DB::raw('COUNT(*) as count_item'))
@@ -62,7 +63,9 @@ class CartController extends Controller
         ->groupBy('my_carts.userID')
         ->first();
 
-        $cartItem=$noItem->count_item;
+        if($noItem){
+            $cartItem=$noItem->count_item;
+        }
         Session()->put('cartItem',$cartItem); //assign value to session varible cartItem
     }
 }
