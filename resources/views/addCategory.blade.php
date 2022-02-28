@@ -10,6 +10,7 @@
             <div class="form-group">
                 <label for="categoryName">Category Name</label>
                 <input type="text" class="form-control" id="categoryName" name="categoryName">
+                
             </div>
             <button type="submit" class="btn btn-primary">Add New</button>
         </form>
