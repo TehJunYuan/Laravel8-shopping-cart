@@ -9,7 +9,6 @@ use App\Models\Product;
 use Session;
 use Auth; //to insert user ID
 
-
 class CartController extends Controller
 {
     //

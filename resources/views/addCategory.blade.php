@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-sm-3"></div>
     <div class="col-sm-6">
-        <br><br>
+        <br><br>https://github.com/DarenF-20C/Project.git
         <h3>Create New Category</h3>
         <form method="post" actions="{{route('storeCategory')}}">
         @csrf

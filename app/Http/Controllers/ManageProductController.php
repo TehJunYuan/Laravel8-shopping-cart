@@ -52,7 +52,7 @@ class ManageProductController extends Controller
     }
 
     
-    
+        
     public function view(){
         //only admin can access to the page. It will check the account is an user or admin.
         if(Auth::id()!=1){
